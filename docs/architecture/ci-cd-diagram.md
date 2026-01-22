@@ -1,6 +1,6 @@
+---
 layout: mermaid
 title: CI/CD Architecture
-
 ---
 
 ```mermaid
