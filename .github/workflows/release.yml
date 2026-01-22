@@ -2,26 +2,28 @@ name: Release
 
 on:
   workflow_call:
-
-permissions:
-  contents: write
-  pull-requests: read
+    inputs:
+      version:
+        required: false
+        type: string
 
 jobs:
   release:
+    name: Release Job
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+      - name: Run release
+        run: |
+          echo "Releasing version: ${{ inputs.version || 'auto' }}"
