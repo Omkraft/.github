@@ -1,4 +1,7 @@
-# CI/CD Architecture Diagram
+layout: mermaid
+title: CI/CD Architecture
+
+---
 
 ```mermaid
 flowchart TD
