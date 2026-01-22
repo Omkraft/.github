@@ -4,3 +4,7 @@ svg[id^="mermaid-"] {
   margin-left: auto;
   margin-right: auto;
 }
+
+.main-content {
+    text-align: center;
+}
