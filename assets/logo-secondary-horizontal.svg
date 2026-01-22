@@ -1,13 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-	viewBox="0 0 1200 300"
-	width="1200"
-	height="300">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="100%" height="100%">
 
 	<!-- Background -->
 	<rect width="100%" height="100%" fill="#0B1C3D"/>
 
 	<!-- ICON -->
-	<g transform="translate(60 50)">
+	<g transform="translate(15 15) scale(1.25)">
 		<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" id="svg1" width="160.8" height="233.60001" viewBox="0 0 160.8 233.60001" sodipodi:docname="Screenshot 2026-01-21 190744.svg" inkscape:version="1.4.3 (0d15f75, 2025-12-25)">
          <defs id="defs1"/>
          <sodipodi:namedview id="namedview1" pagecolor="transparent" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="transparent" inkscape:zoom="4.8501711" inkscape:cx="80.306445" inkscape:cy="116.8" inkscape:window-width="3440" inkscape:window-height="1351" inkscape:window-x="-9" inkscape:window-y="-9" inkscape:window-maximized="1" inkscape:current-layer="g1"/>
@@ -53,7 +50,7 @@
 	</g>
 
 	<!-- TEXT -->
-	<g transform="translate(240 160)">
+	<g transform="translate(240 150) scale(1.1)">
 		<!-- Omkraft (Bold) -->
 		<text x="0" y="0"
 			font-size="72"
