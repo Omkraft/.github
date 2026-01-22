@@ -4,20 +4,12 @@
   <meta charset="UTF-8" />
   <title>{{ page.title }}</title>
 
-  <!-- GitHub-style markdown -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css"
   />
 
-  <!-- Mermaid -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "default"
-    });
-  </script>
 
   <style>
     body {
@@ -32,5 +24,18 @@
   <article class="markdown-body">
     {{ content }}
   </article>
+
+  <script>
+    mermaid.initialize({ startOnLoad: false });
+
+    document.querySelectorAll("pre > code.language-mermaid").forEach(block => {
+      const container = document.createElement("div");
+      container.className = "mermaid";
+      container.textContent = block.textContent;
+      block.parentElement.replaceWith(container);
+    });
+
+    mermaid.run();
+  </script>
 </body>
 </html>
