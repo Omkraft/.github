@@ -16,6 +16,8 @@ jobs:
         with:
           types: |
             feat
+            feat!
+            BREAKING CHANGE
             fix
             docs
             style
