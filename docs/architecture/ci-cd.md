@@ -37,11 +37,11 @@ Repositories **call** these workflows instead of redefining logic.
 ---
 
 ## Enforced Checks
-| Check | Purpose |
-|----|----|
-| Lint | Code quality |
-| PR Title | Semantic versioning |
-| Release | Automated tagging & changelog |
+| Check     | Purpose |
+|-----------|---------|
+| Lint      | Code quality |
+| PR Title  | Semantic versioning |
+| Release   | Automated tagging & changelog |
 
 These checks are enforced using **Require Workflows** (not legacy status checks).
 
