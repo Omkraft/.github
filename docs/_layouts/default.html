@@ -1,33 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>{{ page.title }}</title>
+---
+layout: page
+---
 
-  <!-- GitHub-style Markdown CSS -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css"
-  />
-
-  <style>
-    body {
-      margin: 0;
-      padding: 2rem;
-      background: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Helvetica, Arial, sans-serif;
-    }
-
-    .markdown-body {
-      max-width: 980px;
-      margin: 0 auto;
-    }
-  </style>
-</head>
-<body>
-  <div class="markdown-body">
-    {{ content }}
-  </div>
-</body>
-</html>
+<div class="markdown-body">
+  {{ content }}
+</div>

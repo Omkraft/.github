@@ -1,41 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>{{ page.title }}</title>
+---
+layout: page
+---
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css"
-  />
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-
-  <style>
-    body {
-      margin: 0;
-      text-align: center;
-      padding: 2rem;
-      background: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-
-    .markdown-body {
-      box-sizing: border-box;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0;
-    }
-  </style>
-</head>
-
-<body>
-  <article class="markdown-body">
-    {{ content }}
-  </article>
-
-  <script>
-    mermaid.initialize({ startOnLoad: true });
-  </script>
-</body>
-</html>
+<div class="markdown-body">
+  {{ content }}
+</div>
