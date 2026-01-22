@@ -1,7 +1,9 @@
 ---
-layout: mermaid
-title: CI/CD Architecture
+layout: default
+title: CI/CD Architecture Diagram
 ---
+
+{% include mermaid.html %}
 
 ```mermaid
 flowchart TD
