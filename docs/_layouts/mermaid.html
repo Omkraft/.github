@@ -35,16 +35,7 @@
   </article>
 
   <script>
-    mermaid.initialize({ startOnLoad: false });
-
-    document.querySelectorAll("pre > code.language-mermaid").forEach(block => {
-      const container = document.createElement("div");
-      container.className = "mermaid";
-      container.textContent = block.textContent;
-      block.parentElement.replaceWith(container);
-    });
-
-    mermaid.run();
+    mermaid.initialize({ startOnLoad: true });
   </script>
 </body>
 </html>
