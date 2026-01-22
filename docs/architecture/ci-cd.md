@@ -51,3 +51,13 @@ These checks are enforced using **Require Workflows** (not legacy status checks)
 - **No** manual releases
 - **No** per-repo release logic
 - **No** bypassing CI via UI
+
+---
+
+## Architecture Diagrams
+
+- [CI/CD Flow](ci-cd-diagram.md)
+- [Reusable Workflows](workflows-diagram.md)
+- [Release Pipeline](release-pipeline.md)
+- [Secrets & Permissions](secrets-flow.md)
+- [Governance Model](governance-diagram.md)
