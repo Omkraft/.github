@@ -5,5 +5,7 @@ theme: jekyll-theme-cayman
 markdown: kramdown
 kramdown:
   input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
 
 show_downloads: false
