@@ -3,6 +3,9 @@ name: PR Title Lint
 on:
   workflow_call:
 
+permissions:
+  pull-requests: read
+
 jobs:
   lint-pr-title:
     runs-on: ubuntu-latest
