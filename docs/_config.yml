@@ -1,0 +1,9 @@
+title: Omkraft Engineering Docs
+description: Internal engineering standards, CI/CD, and governance
+theme: jekyll-theme-cayman
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+show_downloads: false
