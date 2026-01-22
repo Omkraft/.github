@@ -1,3 +1,10 @@
+---
+layout: default
+title: Omkraft Engineering Docs
+---
+
+{% include head-extra.html %}
+
 # Omkraft Engineering Documentation
 
 Welcome to Omkraft’s internal engineering documentation.

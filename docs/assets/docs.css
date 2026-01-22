@@ -1,0 +1,6 @@
+/* Center Mermaid diagrams rendered by mermaid.run() */
+svg[id^="mermaid-"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
