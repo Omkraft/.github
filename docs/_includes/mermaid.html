@@ -2,20 +2,49 @@
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
 
   mermaid.initialize({
-    startOnLoad: false,
-    theme: "base",
-    themeVariables: {
-      primaryColor: "#3A98F1",
-      primaryTextColor: "#ffffff",
-      primaryBorderColor: "#05004E",
-      lineColor: "#05004E",
-      fontFamily:
-        "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-    }
-  });
+  startOnLoad: false,
+  theme: "base",
+  themeVariables: {
+    /* Core brand */
+    primaryColor: "#3A98F1",
+    primaryTextColor: "#ffffff",
+    primaryBorderColor: "#05004E",
+    lineColor: "#05004E",
 
-  // Explicitly render all Mermaid blocks
+    /* Node styling */
+    secondaryColor: "#EAF2FF",
+    tertiaryColor: "#F6F9FF",
+
+    /* Text */
+    fontFamily:
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif",
+    fontSize: "14px",
+
+    /* Flowchart-specific */
+    nodeBorder: "#05004E",
+    clusterBorder: "#05004E",
+
+    /* Contrast & readability */
+    mainBkg: "#ffffff",
+    edgeLabelBackground: "#ffffff"
+  }
+});
+
+
   mermaid.run({
     querySelector: "pre code.language-mermaid"
   });
 </script>
+
+<style>
+  /* Center Mermaid diagrams */
+  .mermaid {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
