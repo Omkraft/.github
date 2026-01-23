@@ -30,22 +30,20 @@
     if (!blocks.length) return;
 
     mermaid.run({ nodes: blocks });
+
+    // 🔒 FINAL, GUARANTEED CENTERING
+    requestAnimationFrame(() => {
+      document.querySelectorAll("pre").forEach(pre => {
+        if (pre.querySelector("svg")) {
+          pre.style.textAlign = "center";
+
+          const svg = pre.querySelector("svg");
+          if (svg) {
+            svg.style.display = "inline-block";
+            svg.style.maxWidth = "100%";
+          }
+        }
+      });
+    });
   });
 </script>
-
-<style>
-  /* 🔒 FINAL, CORRECT CENTERING FOR CAYMAN + MERMAID */
-  pre:has(> .mermaid) {
-    display: flex;
-    justify-content: center;
-  }
-
-  pre:has(> .mermaid) .mermaid {
-    width: fit-content;
-  }
-
-  pre:has(> .mermaid) svg {
-    max-width: 100%;
-    height: auto;
-  }
-</style>
