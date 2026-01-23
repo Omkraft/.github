@@ -30,14 +30,18 @@
     if (!blocks.length) return;
 
     mermaid.run({ nodes: blocks });
-
-    // Center diagrams (reliable)
-    requestAnimationFrame(() => {
-      document.querySelectorAll('svg[id^="mermaid-"]').forEach(svg => {
-        svg.style.display = "block";
-        svg.style.margin = "2rem auto";
-        svg.style.maxWidth = "100%";
-      });
-    });
   });
 </script>
+
+<style>
+  /* 🔒 FINAL, RELIABLE CENTERING */
+  .mermaid {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
