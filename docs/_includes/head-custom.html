@@ -1,0 +1,43 @@
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "base",
+    themeVariables: {
+      /* Omkraft brand */
+      primaryColor: "#3A98F1",
+      primaryTextColor: "#ffffff",
+      primaryBorderColor: "#05004E",
+      lineColor: "#05004E",
+
+      /* Flowchart specifics */
+      nodeBorder: "#05004E",
+      nodeTextColor: "#05004E",
+      clusterBorder: "#05004E",
+      clusterBkg: "#F6F9FF",
+      edgeLabelBackground: "#ffffff",
+
+      /* Typography */
+      fontFamily:
+        "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif",
+      fontSize: "14px"
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const blocks = document.querySelectorAll("pre code.language-mermaid");
+    if (!blocks.length) return;
+
+    mermaid.run({ nodes: blocks });
+
+    // Center diagrams (reliable)
+    requestAnimationFrame(() => {
+      document.querySelectorAll('svg[id^="mermaid-"]').forEach(svg => {
+        svg.style.display = "block";
+        svg.style.margin = "2rem auto";
+        svg.style.maxWidth = "100%";
+      });
+    });
+  });
+</script>
