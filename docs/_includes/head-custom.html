@@ -34,13 +34,17 @@
 </script>
 
 <style>
-  /* 🔒 FINAL, RELIABLE CENTERING */
-  .mermaid {
+  /* 🔒 FINAL, CORRECT CENTERING FOR CAYMAN + MERMAID */
+  pre:has(> .mermaid) {
     display: flex;
     justify-content: center;
   }
 
-  .mermaid svg {
+  pre:has(> .mermaid) .mermaid {
+    width: fit-content;
+  }
+
+  pre:has(> .mermaid) svg {
     max-width: 100%;
     height: auto;
   }
