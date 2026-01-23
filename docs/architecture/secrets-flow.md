@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Secrets & Permissions Flow
-mermaid: true
 ---
 
 ```mermaid

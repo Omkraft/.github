@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Reusable Workflow Architecture
-mermaid: true
 ---
 
 ```mermaid

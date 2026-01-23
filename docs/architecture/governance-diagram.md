@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Governance & Branch Protection
-mermaid: true
 ---
 
 ```mermaid

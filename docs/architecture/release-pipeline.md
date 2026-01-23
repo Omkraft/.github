@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Release Pipeline Diagram
-mermaid: true
 ---
 
 ```mermaid
