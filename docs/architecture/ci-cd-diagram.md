@@ -3,6 +3,8 @@ layout: mermaid
 title: CI/CD Architecture Diagram
 ---
 
+{% include mermaid.html %}
+
 ```mermaid
 flowchart TD
     Dev[Developer] -->|PR| GitHub[GitHub Repo]
