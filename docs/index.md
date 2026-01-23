@@ -3,7 +3,7 @@ layout: default
 title: Omkraft Engineering Docs
 ---
 
-{% include head-extra.html %}
+<link rel="stylesheet" href="{{ '/assets/docs.css' | relative_url }}">
 
 # Omkraft Engineering Documentation
 

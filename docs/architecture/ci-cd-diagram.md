@@ -1,5 +1,5 @@
 ---
-layout: mermaid
+layout: default
 title: CI/CD Architecture Diagram
 mermaid: true
 ---

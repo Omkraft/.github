@@ -1,5 +1,5 @@
 ---
-layout: mermaid
+layout: default
 title: Release Pipeline Diagram
 mermaid: true
 ---

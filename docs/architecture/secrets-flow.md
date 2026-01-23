@@ -1,5 +1,5 @@
 ---
-layout: mermaid
+layout: default
 title: Secrets & Permissions Flow
 mermaid: true
 ---
