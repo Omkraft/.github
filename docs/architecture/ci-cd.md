@@ -1,3 +1,8 @@
+---
+layout: default
+title: CI/CD Overview
+---
+
 # CI/CD Architecture (Omkraft)
 
 ## Overview
