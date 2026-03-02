@@ -1,19 +1,19 @@
----
+﻿---
 layout: default
 title: Reusable Workflow Architecture
 ---
 
 ```mermaid
 flowchart LR
-    AppAPI[app-api repo]
-    AppUI[app-ui repo]
+    Org[Omkraft/.github]
+    Org --> WF1[pr-title.yml]
+    Org --> WF2[release.yml]
 
-    AppAPI -->|uses| ReusableRelease
-    AppUI -->|uses| ReusableRelease
+    UI[app-ui] -->|uses| WF1
+    UI -->|uses| WF2
+    UI --> UILocal[ui-pr-checks.yml + deploy job]
 
-    ReusableRelease[Omkraft/.github<br/>Reusable Workflows]
-
-    ReusableRelease --> LintWF[lint.yml]
-    ReusableRelease --> PRTitleWF[pr-title.yml]
-    ReusableRelease --> ReleaseWF[release.yml]
+    API[app-api] -->|uses| WF1
+    API -->|uses| WF2
+    API --> APILocal[lint.yml + deploy job]
 ```

@@ -1,39 +1,30 @@
-# Secrets & Tokens
+﻿# 🔐 Secrets and Tokens
 
-## Token Strategy
+## Release Token Strategy
 
-Omkraft uses **fine-grained Personal Access Tokens (PATs)**.
+Reusable release workflow requires a `RELEASE_TOKEN` secret (fine-grained PAT) from each consumer repo.
 
-### Why
-- GitHub does NOT allow `GITHUB_TOKEN` to create releases across reusable workflows
-- Fine-grained tokens provide least-privilege access
-
----
-
-## Token Ownership
-
-- Resource owner: **Omkraft organization**
-- Scope: All repositories (or explicitly selected)
+Why:
+- Workflow needs permission to create tags and GitHub Releases.
+- Token scope is explicit and auditable.
 
 ---
 
-## Required Permissions
+## Minimum Permissions
 
 | Permission | Access |
-|----------|-------|
-| Contents | Read & Write |
+| --- | --- |
+| Contents | Read and Write |
 | Pull Requests | Read |
-| Metadata | Read (required) |
+| Metadata | Read |
 
-❗ There is NO separate "Releases" permission  
-Releases are covered under **Contents**
+`Releases` is covered under `Contents` permissions.
 
 ---
 
-## Secret Storage
+## Storage Pattern
 
-Token is stored as:
-```sql
-ORG_SECRET: RELEASE_TOKEN
-```
-Used **only in release** workflows.
+Store token as repository secret:
+- `RELEASE_TOKEN`
+
+The reusable workflow maps it to `GITHUB_TOKEN` only for `semantic-release` execution.

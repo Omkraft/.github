@@ -1,51 +1,47 @@
-# Release Process
+﻿# 🏷️ Release Process
 
 ## Tooling
 
-Omkraft uses:
-
+Omkraft release automation uses:
 - `semantic-release`
-- Conventional Commits
-- GitHub Actions
+- Conventional Commit semantics
+- GitHub Actions reusable release workflow
 
 ---
 
-## When a Release Happens
+## Trigger
 
-A release is triggered when:
+Release runs on push to `main` through each app repo's release workflow, which calls:
 
-- A PR is merged into `main`
-- The merge commit contains Conventional Commit messages
+```yaml
+uses: Omkraft/.github/.github/workflows/release.yml@main
+```
 
 ---
 
 ## Version Calculation
 
-| Commit Type | Version Impact |
-|-----------|---------------|
-| feat | minor |
-| fix | patch |
-| feat! | major |
-| BREAKING CHANGE | major |
+| Change type | Version impact |
+| --- | --- |
+| `fix` | patch |
+| `feat` | minor |
+| `feat!` or `BREAKING CHANGE` | major |
 
 ---
 
-## What Happens Automatically
+## Output
 
-On release:
-- Git tag is created (e.g. `v1.2.0`)
+When release-worthy commits are present:
+- New tag is created (example: `v1.7.0`)
 - GitHub Release is created
 - Release notes are generated
-- Commit history is analyzed
+
+When no release-worthy commits exist:
+- `semantic-release` exits without creating a new tag/release
 
 ---
 
-## Where to See Releases
+## Repo Nuance
 
-- **Actions → Release workflow**
-- **Code → Releases**
-- **Tags**
-
-If nothing appears:
-- No release-worthy commits were detected
-- Or commit messages were invalid
+- `app-ui` deployment expects a release tag on the commit and fails deploy if missing.
+- `app-api` deploy currently runs before release in its pipeline.

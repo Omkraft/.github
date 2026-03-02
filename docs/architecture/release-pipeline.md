@@ -1,4 +1,4 @@
----
+﻿---
 layout: default
 title: Release Pipeline Diagram
 ---
@@ -6,15 +6,15 @@ title: Release Pipeline Diagram
 ```mermaid
 sequenceDiagram
     participant Dev as Developer
-    participant GH as GitHub
+    participant Repo as App Repo
     participant CI as GitHub Actions
+    participant RW as Reusable release.yml
     participant SR as semantic-release
 
-    Dev->>GH: Merge PR to main
-    GH->>CI: Trigger release workflow
-    CI->>SR: Analyze commits
-    SR->>SR: Determine version
-    SR->>GH: Create Git tag
-    SR->>GH: Create GitHub Release
-    GH-->>Dev: Release published
+    Dev->>Repo: Merge PR to main
+    Repo->>CI: Trigger repo release workflow
+    CI->>RW: Call reusable workflow
+    RW->>SR: Analyze commits
+    SR->>SR: Compute next version (if any)
+    SR->>Repo: Create tag + GitHub release
 ```

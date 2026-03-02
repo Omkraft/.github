@@ -1,11 +1,8 @@
-# Omkraft Inc. — Brand Guidelines
+﻿# Omkraft Inc. - Brand Guidelines
 
-This document defines the **official, locked brand assets and design tokens**
-for **Omkraft** Inc.
+This document defines the official, locked brand assets and design tokens for Omkraft Inc.
 
-These guidelines exist to ensure **visual consistency, accessibility, and
-long-term brand integrity** across all repositories, applications, and
-documents.
+These guidelines ensure visual consistency, accessibility, and long-term brand integrity across repositories, apps, and documentation.
 
 > _Systems, Crafted._
 
@@ -13,99 +10,56 @@ documents.
 
 ## 1. Brand Identity
 
-- **Official Name: Omkraft** Inc.
-- **Short Name (technical use):** Omkraft
-- **Tagline:** *Systems, Crafted.*
-- **Tone:** Calm, precise, engineered, intentional
-- **Design Philosophy:** Minimal, functional, non-trendy, durable
+- Official Name: Omkraft Inc.
+- Short Name (technical use): Omkraft
+- Tagline: _Systems, Crafted._
+- Tone: Calm, precise, engineered, intentional
+- Design Philosophy: Minimal, functional, durable
 
 ---
 
 ## 2. Canonical Logo Files (Locked)
 
-The following logo files are **authoritative** and must not be modified.
+### Source logos (`brand/`)
 
-```yaml
-logo-primary.svg
-logo-secondary.svg
-logo-small.svg
+```text
+brand/logo-primary.svg
+brand/logo-secondary.svg
+brand/logo-small.svg
 ```
 
+### Distribution logos (`assets/`)
 
-### Logo Types
+```text
+assets/logo-primary-horizontal.svg
+assets/logo-primary-square.svg
+assets/logo-secondary-horizontal.svg
+assets/logo-secondary-square.svg
+assets/logo-small.svg
+```
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">File</th>
-      <th align="left">Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>logo-primary.svg</code></td>
-      <td>Light backgrounds</td>
-    </tr>
-    <tr>
-      <td><code>logo-secondary.svg</code></td>
-      <td>Dark backgrounds / dark UI</td>
-    </tr>
-    <tr>
-      <td><code>logo-small.svg</code></td>
-      <td>Favicons, compact headers</td>
-    </tr>
-  </tbody>
-</table>
+The brand files above are authoritative and must not be modified without explicit approval.
+
+---
+
+## 3. Logo Usage
+
+| File | Usage |
+| --- | --- |
+| `logo-primary.svg` / `logo-primary-horizontal.svg` | Light backgrounds |
+| `logo-secondary.svg` / `logo-secondary-horizontal.svg` | Dark backgrounds |
+| `logo-small.svg` | Favicon, compact headers, badges |
+| `*-square.svg` | Avatars, cards, social previews |
 
 No logo may redefine geometry, text, spacing, or proportions.
 
 ---
 
-## 3. Logo Construction (Strictly Locked)
+## 4. Typography System
 
-The Omkraft logo consists of:
-- Omkraft icon (SVG paths)
-- Brand text: **Omkraft Inc.**
-- Tagline: *Systems, Crafted.*
+### UI Typeface
 
-### Typography Rules (Logo Only)
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">Element</th>
-      <th align="left">Weight</th>
-      <th align="left">Style</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Omkraft</td>
-      <td><strong>Bold</strong></td>
-      <td>Normal</td>
-    </tr>
-    <tr>
-      <td>Inc.</td>
-      <td>Regular</td>
-      <td>Normal</td>
-    </tr>
-    <tr>
-      <td>Systems, Crafted.</td>
-      <td>Regular</td>
-      <td><em>Italic</em></td>
-    </tr>
-  </tbody>
-</table>
-
-⚠️ Logo SVGs must **not embed custom fonts**.
-
----
-
-## 4. Typography System (UI & Product)
-
-### Primary UI Typeface
-
-**Inter** is the official Omkraft UI font.
+Inter is the official Omkraft UI font.
 
 ```css
 font-family:
@@ -119,54 +73,26 @@ font-family:
   sans-serif;
 ```
 
-- Inter is used for **all UI, dashboards, apps, and documentation**
-- System fonts act only as fallbacks
-- Logo typography remains font-agnostic
+- Use Inter across UI and docs.
+- System fonts are fallback only.
+- Logo typography stays locked in the SVG assets.
 
 ---
 
-## 5. Brand Color Palette (Authoritative)
+## 5. Core Brand Colors (Locked)
 
-### Core Brand Colors (Locked)
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">Token</th>
-      <th align="left">Hex</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Omkraft Blue (Primary)</td>
-      <td><code>#305AF3</code></td>
-    </tr>
-    <tr>
-      <td>Omkraft Mint (Accent)</td>
-      <td><code>#00AD97</code></td>
-    </tr>
-    <tr>
-      <td>Omkraft Navy (Background)</td>
-      <td><code>#041459</code></td>
-    </tr>
-    <tr>
-      <td>Omkraft White</td>
-      <td><code>#FFFFFF</code></td>
-    </tr>
-  </tbody>
-</table>
-
-These values define **brand identity** and must not be altered without review.
+| Token | Hex |
+| --- | --- |
+| Omkraft Blue (Primary) | `#305AF3` |
+| Omkraft Mint (Accent) | `#00AD97` |
+| Omkraft Navy (Background) | `#041459` |
+| Omkraft White | `#FFFFFF` |
 
 ---
 
-## 6. Extended Color Palette (UI System)
+## 6. Extended Color Palette
 
-Approved tonal ramps derived from core brand colors.
-
-Used for accessibility, hover states, elevation, and UI hierarchy.
-
-### Blue (Primary Ramp)
+### Blue ramp
 
 ```css
 --omkraft-blue-50:  #eef2ff;
@@ -181,7 +107,7 @@ Used for accessibility, hover states, elevation, and UI hierarchy.
 --omkraft-blue-900: #16286b;
 ```
 
-### Mint (Accent Ramp)
+### Mint ramp
 
 ```css
 --omkraft-mint-50:  #e6fbf7;
@@ -196,7 +122,7 @@ Used for accessibility, hover states, elevation, and UI hierarchy.
 --omkraft-mint-900: #00453c;
 ```
 
-### Navy (Background Ramp)
+### Navy ramp
 
 ```css
 --omkraft-navy-50:  #e9ecf5;
@@ -213,9 +139,7 @@ Used for accessibility, hover states, elevation, and UI hierarchy.
 
 ---
 
-## 7. Neutral & Surface Colors
-
-Used for cards, inputs, borders, overlays, and elevation.
+## 7. Surface and Status Colors
 
 ```css
 --surface-1: rgba(255, 255, 255, 0.04);
@@ -226,15 +150,7 @@ Used for cards, inputs, borders, overlays, and elevation.
 --border-subtle: rgba(255, 255, 255, 0.16);
 --border-default: rgba(255, 255, 255, 0.22);
 --border-strong: rgba(255, 255, 255, 0.32);
-```
 
----
-
-## 8. Destructive & Status Colors
-
-Calm, non-alarming, and accessible.
-
-```css
 --destructive: #dc2626;
 --destructive-bg: rgba(220, 38, 38, 0.12);
 --destructive-hover: rgba(220, 38, 38, 0.18);
@@ -242,55 +158,7 @@ Calm, non-alarming, and accessible.
 
 ---
 
-## 9. Logo Background Usage
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">Background</th>
-      <th align="left">Logo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Light / White</td>
-      <td><code>logo-primary.svg</code></td>
-    </tr>
-    <tr>
-      <td>Dark / Navy</td>
-      <td><code>logo-secondary.svg</code></td>
-    </tr>
-  </tbody>
-</table>
-
-❌ Do not place logos on:
-
-- Gradients
-- Busy imagery
-- Low-contrast surfaces
-
----
-
-## 10. Spacing & Clear Space
-
-- Minimum clear space = **height of the icon**
-- Logos must never touch container edges
-- Do not crowd with UI elements
-
----
-
-## 11. Scaling Rules
-
-- SVG logos may be scaled **uniformly only**
-- No stretching or distortion
-- Minimum widths:
-    - Header: 200px
-    - Avatar: 64px
-    - Footer: 120px
-
----
-
-## 12. Do Not (Strict)
+## 8. Do Not (Strict)
 
 ❌ Redraw or simplify SVG paths
 
@@ -298,48 +166,44 @@ Calm, non-alarming, and accessible.
 
 ❌ Alter colors inside logo SVGs
 
-❌ Add gradients, shadows, or effects
+❌ Add gradients/shadows/effects to logo files
 
-❌ Substitute typography
+❌ Substitute typography inside logo assets
 
-If a new size is required, **wrap or scale the existing SVG**.
+If a different size is needed, scale existing SVGs uniformly.
 
 ---
 
-## 13. Repository Usage
-
-Recommended structure:
+## 9. Repository Usage
 
 ```text
 .github/
-├── brand/
-│   ├── logo-primary.svg
-│   ├── logo-secondary.svg
-│   ├── logo-small.svg
-│   └── BRAND.md
+|-- brand/
+|   |-- logo-primary.svg
+|   |-- logo-secondary.svg
+|   |-- logo-small.svg
+|   `-- BRAND.md
+|-- assets/
+|   |-- logo-primary-horizontal.svg
+|   |-- logo-primary-square.svg
+|   |-- logo-secondary-horizontal.svg
+|   |-- logo-secondary-square.svg
+|   `-- logo-small.svg
 ```
 
-All repositories must reference these assets instead of redefining them.
+---
+
+## 10. Governance
+
+Changes to logos, typography, core colors, or tagline require explicit review and approval.
+
+The Omkraft brand is locked by default.
 
 ---
 
-## 14. Governance
+## 11. Brand Statement
 
-Any change to:
-- Logos
-- Typography
-- Core colors
-- Tagline
-
-Requires **explicit review and approval**.
-
-The Omkraft brand is **locked by default**.
-
----
-
-## 15. Brand Statement
-
-**Omkraft** Inc. builds systems with intent.
+Omkraft Inc. builds systems with intent.
 
 Every design choice favors clarity, structure, and long-term maintainability.
 

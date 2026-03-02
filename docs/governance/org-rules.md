@@ -1,17 +1,26 @@
-# Organization Rules
+﻿# 🧱 Organization Rules
 
-## Enforced Rules
+## Enforced Practices
 
-- Require Workflows (not legacy checks)
-- Reusable workflows only
-- No local release logic
-- Conventional Commits mandatory
+- Conventional Commit-style PR titles.
+- Required checks before merge to protected branch.
+- Automated release publication from `main`.
+- Shared guardrails managed centrally in `Omkraft/.github`.
 
 ---
 
-## Things You Should NOT Do
+## Things to Avoid
 
-❌ Disable workflows to merge  
-❌ Create manual releases  
-❌ Change tokens casually  
-❌ Edit `.github` workflows without review
+- Disabling workflows to force a merge.
+- Manual release publishing that bypasses semantic-release.
+- Editing reusable workflow behavior in consumer repos.
+- Changing token permissions without review.
+
+---
+
+## Change Management
+
+For any CI/CD or governance update:
+1. Update workflow/template/docs in this repository.
+2. Validate behavior in consumer repos.
+3. Keep architecture docs and diagrams aligned.

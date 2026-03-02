@@ -1,28 +1,25 @@
----
+﻿---
 layout: default
 title: CI/CD Architecture Diagram
 ---
 
 ```mermaid
 flowchart TD
-    Dev[Developer] -->|PR| GitHub[GitHub Repo]
+    Dev[Developer] -->|PR opened| Repo[Repository]
 
-    GitHub --> PRChecks[PR Workflows]
-    PRChecks -->|Lint| Lint[Lint Workflow]
-    PRChecks -->|Title| PRTitle[PR Title Check]
+    Repo --> PRTitle[Reusable PR Title Workflow]
+    Repo --> LocalChecks[Repo Local Checks\n(lint/build)]
 
-    Lint --> Pass1[Pass]
-    PRTitle --> Pass2[Pass]
+    PRTitle --> PRPass[Checks pass]
+    LocalChecks --> PRPass
 
-    Pass1 --> Merge[Merge to main]
-    Pass2 --> Merge
+    PRPass --> Merge[Merge to main]
 
-    Merge --> ReleaseTrigger[Push to main]
+    Merge --> MainPipe[Repo Main Pipeline]
+    MainPipe --> SharedRelease[Reusable Release Workflow\nsemantic-release]
 
-    ReleaseTrigger --> Caller[Repo Release Workflow]
-    Caller --> Reusable[Org Reusable Release Workflow]
+    MainPipe --> Deploy[Repo Deploy Step]
 
-    Reusable --> Semantic[semantic-release]
-    Semantic --> Tag[Git Tag]
-    Semantic --> GHRelease[GitHub Release]
+    SharedRelease --> Tag[Git Tag]
+    SharedRelease --> GHRelease[GitHub Release]
 ```

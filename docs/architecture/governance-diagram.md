@@ -1,15 +1,16 @@
----
+﻿---
 layout: default
-title: Governance & Branch Protection
+title: Governance and Branch Protection
 ---
 
 ```mermaid
 flowchart TD
-    Push[Direct Push] -->|Blocked| Main[main]
-    PR[Pull Request] --> Checks[Required Workflows]
+    Direct[Direct push to main] -->|Blocked by branch protection| Deny[Deny]
+    PR[Pull Request] --> Checks[Required checks]
 
-    Checks -->|Fail| Block[Merge Blocked]
-    Checks -->|Pass| MergeAllowed[Merge Allowed]
+    Checks -->|Fail| Block[Merge blocked]
+    Checks -->|Pass| Allow[Merge allowed]
 
-    MergeAllowed --> Release[Automated Release]
+    Allow --> Pipeline[Main pipeline]
+    Pipeline --> Shared[Shared release workflow]
 ```

@@ -1,25 +1,28 @@
-# Permissions & Access
+﻿# 🛡️ Permissions and Access
+
+## Ownership Boundaries
+
+| Area | Source of truth |
+| --- | --- |
+| Shared CI guardrails | `Omkraft/.github` reusable workflows |
+| Product build/deploy logic | Each app repository |
+| Release publishing | Reusable `release.yml` workflow |
+
+---
 
 ## GitHub Actions Permissions
 
-Organization-wide settings:
-- Read & Write permissions enabled
-- GitHub Actions allowed to create PRs
+Reusable release job requests:
+- `contents: write`
+- `pull-requests: read`
+
+PR title check workflow requests:
+- `pull-requests: read`
 
 ---
 
-## Who Can Change What
+## Access Guidance
 
-| Area | Location |
-|----|----|
-| CI Logic | Omkraft/.github |
-| App Code | app-api / app-ui |
-| Releases | Automated only |
-
----
-
-## CODEOWNERS Enforcement
-
-Critical paths are protected via CODEOWNERS.
-
-Manual overrides are discouraged.
+- Limit write access to workflow files.
+- Route policy changes through reviewed PRs.
+- Keep token scopes least-privilege.

@@ -1,4 +1,4 @@
----
+﻿---
 layout: default
 title: Omkraft Engineering Docs
 ---
@@ -7,21 +7,21 @@ title: Omkraft Engineering Docs
 
 # Omkraft Engineering Documentation
 
-Welcome to Omkraft’s internal engineering documentation.
+Welcome to Omkraft's internal engineering documentation.
 
-These docs define **how we build, review, release, and govern code** across all repositories.
+These docs define how we build, review, release, and govern code across repositories.
 
 ---
 
-## 📚 Documentation Sections
+## 📚 Sections
 
-### 🏗 Architecture
+### 🏗️ Architecture
 - [CI/CD Overview](architecture/ci-cd.md)
 - [Release Process](architecture/release.md)
 - [Workflows](architecture/workflows.md)
 - [Branching Strategy](architecture/branching.md)
 
-### 🛡 Governance
+### 🛡️ Governance
 - [Secrets & Tokens](governance/secrets.md)
 - [Permissions](governance/permissions.md)
 - [Org Rules](governance/org-rules.md)
@@ -34,5 +34,5 @@ These docs define **how we build, review, release, and govern code** across all 
 
 ---
 
-> ⚠️ These docs are **version-controlled and enforced via PRs**.  
-> If it’s not documented here, it’s not official.
+> ⚠️ These docs are version-controlled and enforced via PRs.
+> If it is not documented here, it is not official.

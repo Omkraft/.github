@@ -1,115 +1,97 @@
-<p align="center">
-	<img src="https://raw.githubusercontent.com/Omkraft/.github/main/assets/logo-primary-square.svg" alt="Omkraft Logo" width="240" />
+﻿<p align="center">
+  <img src="https://raw.githubusercontent.com/Omkraft/.github/main/assets/logo-primary-square.svg" alt="Omkraft Logo" width="240" />
 </p>
 
-<h1 align="center">Omkraft</h1>
+<h1 align="center">Omkraft Org Infrastructure</h1>
 
 <p align="center">
-	<strong>Organization-wide branding, assets, and standards</strong>
+  <strong>Shared branding, templates, reusable workflows, and engineering governance</strong>
 </p>
 
 <p align="center">
-	Systems, Crafted.
+  Systems, Crafted.
 </p>
 
 ---
 
 ## 🧭 Purpose
 
-This repository serves as the **central source of truth** for all **organization-wide assets and conventions** used across the Omkraft GitHub organization.
+This repository is the organization-level source of truth for:
+- Shared GitHub workflows consumed by app repositories
+- Issue and pull request templates
+- Brand assets and usage guidance
+- Engineering governance and architecture docs
 
-It ensures:
-- Consistent branding across repositories
-- Shared visual assets
-- Clear standards for contributors and maintainers
-- A clean, scalable foundation for future growth
-
----
-
-## 📦 Repository Contents
-
-This repository is intentionally structured to separate **raw assets** from **brand guidance**.
+It exists to keep cross-repo standards centralized and consistent.
 
 ---
 
-## 📁 Directory Structure
+## 📦 What Lives Here
 
 ```text
 .github/
-├── assets/                        # Production-ready brand assets
-│   ├── logo-primary-horizontal.svg
-│   ├── logo-primary-square.svg
-│   ├── logo-secondary-horizontal.svg
-│   ├── logo-secondary-square.svg
-│   └── logo-small.svg
-│
-├── brand/                         # Brand definitions & source references
-│   ├── BRAND.md                   # Brand guidelines & usage rules
-│   ├── logo-primary.svg
-│   └── logo-secondary.svg
-│
-└── README.md                      # This file
+|-- .github/
+|   |-- ISSUE_TEMPLATE/                 # Org issue templates
+|   |-- PULL_REQUEST_TEMPLATE.md
+|   `-- workflows/
+|       |-- pr-title.yml                # Reusable PR title lint workflow
+|       `-- release.yml                 # Reusable semantic-release workflow
+|-- assets/                             # Production-ready brand assets
+|-- brand/                              # Brand source and usage guide
+`-- docs/                               # Engineering governance + architecture docs
 ```
 
 ---
 
-## 🎨 Branding Strategy
-### Assets (`/assets`)
-- Optimized, **ready-to-use SVGs**
-- Intended for:
-    - README headers
-    - GitHub org profile
-    - Application UIs
-    - Documentation
+## 🛠️ Reusable Workflows
 
-- Includes square & horizontal variants for flexible usage
-### Brand (`/brand`)
-- Canonical brand references
-- Usage rules and rationale
-- Source-of-truth logos
-- **No direct consumption by apps** — documentation & guidance only
+Reusable workflows exported from this repo:
+- `.github/workflows/pr-title.yml`
+- `.github/workflows/release.yml`
+
+Consumer repos currently:
+- `app-ui` calls reusable `pr-title` and `release`, and defines local PR lint/build + deploy orchestration
+- `app-api` calls reusable `pr-title` and `release`, and defines local PR lint + deploy orchestration
 
 ---
 
-## 🔗 Referencing Logos in Other Repos
-Other Omkraft repositories should reference assets directly from this repo, for example:
+## 🎨 Branding Assets
+
+Use assets from `/assets` in downstream repositories (READMEs, docs, app surfaces).
+
+Example:
+
 ```html
 <img src="https://raw.githubusercontent.com/Omkraft/.github/main/assets/logo-primary-square.svg" />
 ```
-This guarantees:
-- No duplication
-- Consistent updates
-- Organization-wide alignment
 
 ---
 
-## 🧠 Brand Principles
-Omkraft stands for:
-- Thoughtful engineering
-- Clean, scalable systems
-- Precision over excess
-- Strong defaults with long-term intent
+## 📚 Documentation
 
-All branding and standards in this repository reinforce those principles.
+Engineering docs are under [`docs/`](docs/README.md), including:
+- CI/CD architecture
+- Workflow ownership model
+- Release pipeline behavior
+- Secret and permission guidance
+- Onboarding and glossary
 
 ---
 
-## 🔮 Future Additions
-This repository may later include:
-- Issue templates
-- Pull request templates
-- CODEOWNERS
-- CONTRIBUTING guidelines
-- Shared documentation
+## ✅ Maintenance Notes
 
-All organization-wide conventions will live here.
+When changing workflow behavior:
+1. Update reusable workflow file(s) in this repo.
+2. Update corresponding docs under `docs/architecture`.
+3. Verify consumer repos still call workflows correctly.
 
 ---
 
 ## 🏷️ License
+
 MIT
 
 ---
 
-<p align="center"> Built by<br/><strong>Omkraft Inc.</strong><br/>Systems, Crafted.</p>
+<p align="center">Built by<br/><strong>Omkraft Inc.</strong><br/>Systems, Crafted.</p>
 <p align="center"><img src="https://raw.githubusercontent.com/Omkraft/.github/main/assets/logo-small.svg" alt="Omkraft Logo Small" width="48" height="48" /></p>

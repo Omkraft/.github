@@ -1,17 +1,18 @@
----
+﻿---
 layout: default
-title: Secrets & Permissions Flow
+title: Secrets and Permissions Flow
 ---
 
 ```mermaid
 flowchart LR
-    PAT[Fine-grained PAT<br/>Org-owned]
-    Secret[RELEASE_TOKEN<br/>Repo Secret]
+    Token[RELEASE_TOKEN\nFine-grained PAT]
+    RepoSecret[Repo Secret Storage]
+    Caller[App repo workflow]
+    Reusable[Omkraft/.github release.yml]
+    GH[GitHub API]
 
-    Secret --> CallerWF[Repo Release Workflow]
-    CallerWF --> ReusableWF[Reusable Release Workflow]
-
-    ReusableWF -->|env:GITHUB_TOKEN| SemanticRelease
-
-    SemanticRelease --> GitHubAPI[GitHub API]
+    Token --> RepoSecret
+    RepoSecret --> Caller
+    Caller --> Reusable
+    Reusable -->|GITHUB_TOKEN=RELEASE_TOKEN| GH
 ```

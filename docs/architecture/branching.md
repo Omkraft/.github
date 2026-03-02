@@ -1,26 +1,18 @@
-# Branching Strategy
+﻿# 🌿 Branching Strategy
 
 ## Protected Branches
 
-| Branch | Rules |
-|------|------|
-| main | Fully protected |
-
----
-
-## main Branch Rules
-
-- No direct pushes
-- PR required
-- Required workflows must pass
-- Linear history preferred
+| Branch | Policy |
+| --- | --- |
+| `main` | Protected; direct push blocked; required checks enforced |
 
 ---
 
 ## Feature Branches
 
-Format:
-```yaml
+Recommended patterns:
+
+```text
 feature/<short-description>
 fix/<short-description>
 chore/<short-description>
@@ -28,7 +20,9 @@ chore/<short-description>
 
 ---
 
-## Merging Strategy
+## Merge Strategy
 
-- Squash merge preferred
-- Merge commit must follow Conventional Commits
+- Open PR into `main`.
+- Ensure required checks pass.
+- Use clean, conventional PR titles.
+- Squash merge is preferred for readable history.
