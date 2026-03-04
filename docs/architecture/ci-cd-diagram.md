@@ -8,7 +8,7 @@ flowchart TD
     Dev[Developer] -->|PR opened| Repo[Repository]
 
     Repo --> PRTitle[Reusable PR Title Workflow]
-    Repo --> LocalChecks[Repo Local Checks\n(lint/build)]
+    Repo --> LocalChecks["Repo Local Checks<br/>(lint/build)"]
 
     PRTitle --> PRPass[Checks pass]
     LocalChecks --> PRPass
@@ -16,7 +16,7 @@ flowchart TD
     PRPass --> Merge[Merge to main]
 
     Merge --> MainPipe[Repo Main Pipeline]
-    MainPipe --> SharedRelease[Reusable Release Workflow\nsemantic-release]
+    MainPipe --> SharedRelease["Reusable Release Workflow<br/>semantic-release"]
 
     MainPipe --> Deploy[Repo Deploy Step]
 

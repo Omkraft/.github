@@ -1,4 +1,4 @@
-﻿<p align="center">
+<p align="center">
   <img src="https://raw.githubusercontent.com/Omkraft/.github/main/assets/logo-primary-square.svg" alt="Omkraft Logo" width="240" />
 </p>
 
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  Systems, Crafted.
+  <em>Systems, Crafted.</em>
 </p>
 
 ---
@@ -76,6 +76,9 @@ Engineering docs are under [`docs/`](docs/README.md), including:
 - Secret and permission guidance
 - Onboarding and glossary
 
+GitHub Pages URL:
+- https://omkraft.github.io/.github/
+
 ---
 
 ## ✅ Maintenance Notes
@@ -93,5 +96,5 @@ MIT
 
 ---
 
-<p align="center">Built by<br/><strong>Omkraft Inc.</strong><br/>Systems, Crafted.</p>
+<p align="center">Built by<br/><span style="font-weight:500;">Omkraft</span> Inc.<br/><em>Systems, Crafted.</em></p>
 <p align="center"><img src="https://raw.githubusercontent.com/Omkraft/.github/main/assets/logo-small.svg" alt="Omkraft Logo Small" width="48" height="48" /></p>
