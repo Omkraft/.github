@@ -1,0 +1,28 @@
+name: PR Agent Review
+
+on:
+  workflow_call:
+    secrets:
+      OPENAI_KEY:
+        required: true
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  review:
+    name: PR Agent Review
+    if: >-
+      github.event.sender.type != 'Bot' &&
+      (github.event_name != 'issue_comment' || github.event.issue.pull_request) &&
+      (github.event_name != 'pull_request' || github.event.pull_request.draft == false || github.event.action == 'ready_for_review')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Qodo PR-Agent
+        uses: docker://codiumai/pr-agent@sha256:14165e525678ace7d9b51cda8652c2d74abb4e1d76b57c4a6ccaeba84663cc64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}

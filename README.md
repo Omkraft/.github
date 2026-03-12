@@ -34,6 +34,7 @@ It exists to keep cross-repo standards centralized and consistent.
 |   |-- ISSUE_TEMPLATE/                 # Org issue templates
 |   |-- PULL_REQUEST_TEMPLATE.md
 |   `-- workflows/
+|       |-- pr-agent-review.yml         # Reusable Qodo PR-Agent review workflow
 |       |-- pr-title.yml                # Reusable PR title lint workflow
 |       `-- release.yml                 # Reusable semantic-release workflow
 |-- assets/                             # Production-ready brand assets
@@ -47,11 +48,31 @@ It exists to keep cross-repo standards centralized and consistent.
 
 Reusable workflows exported from this repo:
 - `.github/workflows/pr-title.yml`
+- `.github/workflows/pr-agent-review.yml`
 - `.github/workflows/release.yml`
 
 Consumer repos currently:
-- `app-ui` calls reusable `pr-title` and `release`, and defines local PR lint/build + deploy orchestration
-- `app-api` calls reusable `pr-title` and `release`, and defines local PR lint + deploy orchestration
+- `.github` runs PR-Agent review automation for infrastructure pull requests
+- `app-ui` calls reusable `pr-title`, `pr-agent-review`, and `release`, and defines local PR lint/build plus deploy orchestration
+- `app-api` calls reusable `pr-title`, `pr-agent-review`, and `release`, and defines local PR lint plus deploy orchestration
+
+---
+
+## 🤖 PR-Agent Review Automation
+
+Qodo PR-Agent is configured to review pull requests:
+- on PR open
+- on PR reopen
+- when a draft PR becomes ready for review
+- on every subsequent push to the PR branch (`synchronize`)
+
+Manual PR-Agent comment commands are also enabled in participating repositories.
+
+Required secret:
+- Organization Actions secret `OPENAI_KEY`
+
+Policy file:
+- `.pr_agent.toml` in each participating repository root
 
 ---
 
