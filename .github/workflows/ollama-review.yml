@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
   pull-requests: write
 
 jobs:
@@ -29,19 +30,168 @@ jobs:
       - name: Pull review model
         run: ollama pull qwen2.5-coder:1.5b
 
-      - name: Run Ollama code review
-        uses: ray5273/ollama-code-review@v1
-        with:
-          OLLAMA_API_URL: http://127.0.0.1:11434
-          MY_GITHUB_TOKEN: ${{ github.token }}
-          OWNER: ${{ github.repository_owner }}
-          REPO: ${{ github.event.repository.name }}
+      - name: Generate Ollama review
+        id: review
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_API_URL: ${{ github.api_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          RESPONSE_LANGUAGE: English
-          MODEL: qwen2.5-coder:1.5b
-          CUSTOM_PROMPT: >
-            Review as a strict senior engineer. Prioritize correctness, behavioral
-            regressions, data integrity, API contract drift, auth and permission issues,
-            performance risks, accessibility regressions, and missing or weak tests.
-            Prefer concrete findings tied to changed files. Do not pad the review with
-            praise or summaries when no issue exists.
+          OLLAMA_MODEL: qwen2.5-coder:1.5b
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import textwrap
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          api_url = os.environ["GITHUB_API_URL"]
+          repo = os.environ["GITHUB_REPOSITORY"]
+          token = os.environ["GITHUB_TOKEN"]
+          pr_number = os.environ["PR_NUMBER"]
+          model = os.environ["OLLAMA_MODEL"]
+
+          headers = {
+              "Authorization": f"Bearer {token}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+              "User-Agent": "omkraft-ollama-review",
+          }
+
+          def github_get(url: str):
+              request = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(request) as response:
+                  return json.loads(response.read().decode("utf-8"))
+
+          files = []
+          page = 1
+          while True:
+              url = (
+                  f"{api_url}/repos/{repo}/pulls/{pr_number}/files?"
+                  + urllib.parse.urlencode({"per_page": 100, "page": page})
+              )
+              batch = github_get(url)
+              if not batch:
+                  break
+              files.extend(batch)
+              page += 1
+
+          changed_files = []
+          total_patch_chars = 0
+          patch_budget = 18000
+
+          for file in files:
+              patch = file.get("patch") or ""
+              if patch:
+                  remaining = patch_budget - total_patch_chars
+                  if remaining <= 0:
+                      patch = ""
+                  elif len(patch) > remaining:
+                      patch = patch[:remaining] + "\n... [truncated]"
+              total_patch_chars += len(patch)
+              changed_files.append(
+                  {
+                      "filename": file["filename"],
+                      "status": file["status"],
+                      "additions": file["additions"],
+                      "deletions": file["deletions"],
+                      "patch": patch,
+                  }
+              )
+
+          prompt = textwrap.dedent(
+              f"""
+              You are reviewing a GitHub pull request.
+
+              Review as a strict senior engineer. Prioritize correctness, behavioral
+              regressions, data integrity, API contract drift, auth and permission issues,
+              performance risks, accessibility regressions, and missing or weak tests.
+              Prefer concrete findings tied to changed files. Do not pad the review with
+              praise or summaries when no issue exists.
+
+              Output requirements:
+              - If there are material issues, produce a short markdown list of findings.
+              - Each finding should mention the relevant file path.
+              - If there are no material issues, respond exactly with: No material issues found.
+
+              Changed files:
+              {json.dumps(changed_files, ensure_ascii=False)}
+              """
+          ).strip()
+
+          payload = json.dumps(
+              {
+                  "model": model,
+                  "prompt": prompt,
+                  "stream": False,
+                  "options": {
+                      "temperature": 0.1,
+                  },
+              }
+          ).encode("utf-8")
+
+          request = urllib.request.Request(
+              "http://127.0.0.1:11434/api/generate",
+              data=payload,
+              headers={"Content-Type": "application/json"},
+              method="POST",
+          )
+
+          try:
+              with urllib.request.urlopen(request, timeout=600) as response:
+                  result = json.loads(response.read().decode("utf-8"))
+          except urllib.error.HTTPError as exc:
+              body = exc.read().decode("utf-8", errors="replace")
+              raise SystemExit(f"Ollama review failed: {exc.code} {body}")
+
+          review_text = (result.get("response") or "").strip() or "No material issues found."
+          review_body = "<!-- omkraft-ollama-review -->\n## Ollama Review\n\n" + review_text
+
+          output_path = os.environ["GITHUB_OUTPUT"]
+          with open(output_path, "a", encoding="utf-8") as fh:
+              fh.write("body<<EOF\n")
+              fh.write(review_body)
+              fh.write("\nEOF\n")
+          PY
+
+      - name: Publish review comment
+        uses: actions/github-script@v7
+        env:
+          REVIEW_BODY: ${{ steps.review.outputs.body }}
+        with:
+          script: |
+            const marker = '<!-- omkraft-ollama-review -->'
+            const body = process.env.REVIEW_BODY
+            const issue_number = context.payload.pull_request.number
+            const { owner, repo } = context.repo
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+              per_page: 100,
+            })
+
+            const existing = comments.find((comment) =>
+              comment.user?.type === 'Bot' && comment.body?.includes(marker)
+            )
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              })
+              return
+            }
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
+              body,
+            })
