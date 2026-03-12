@@ -52,7 +52,7 @@ Reusable workflows exported from this repo:
 - `.github/workflows/release.yml`
 
 Consumer repos currently:
-- `.github` runs PR-Agent review automation for infrastructure pull requests
+- `.github` exports reusable workflows consumed by application repositories
 - `app-ui` calls reusable `pr-title`, `pr-agent-review`, and `release`, and defines local PR lint/build plus deploy orchestration
 - `app-api` calls reusable `pr-title`, `pr-agent-review`, and `release`, and defines local PR lint plus deploy orchestration
 
@@ -65,8 +65,6 @@ Qodo PR-Agent is configured to review pull requests:
 - on PR reopen
 - when a draft PR becomes ready for review
 - on every subsequent push to the PR branch (`synchronize`)
-
-Manual PR-Agent comment commands are also enabled in participating repositories.
 
 Required secret:
 - Organization Actions secret `OPENAI_KEY`
