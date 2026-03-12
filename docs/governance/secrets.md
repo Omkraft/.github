@@ -1,6 +1,6 @@
-# 🔐 Secrets and Tokens
+# ?? Secrets and Tokens
 
-## 🎫 Release Token Strategy
+## ?? Release Token Strategy
 
 Reusable release workflow requires a `RELEASE_TOKEN` secret (fine-grained PAT) from each consumer repo.
 
@@ -10,7 +10,7 @@ Why:
 
 ---
 
-## 🧾 Minimum Permissions
+## ?? Minimum Permissions
 
 | Permission | Access |
 | --- | --- |
@@ -22,7 +22,7 @@ Why:
 
 ---
 
-## 🗄️ Storage Pattern
+## ??? Storage Pattern
 
 Store the release token as a repository secret:
 - `RELEASE_TOKEN`
@@ -31,19 +31,13 @@ The reusable release workflow maps it to `GITHUB_TOKEN` only for `semantic-relea
 
 ---
 
-## 🤖 PR-Agent LLM Secret
+## ?? Ollama Review Secrets
 
-Reusable PR review workflow requires an `OPENAI_KEY` secret.
-
-Recommended storage pattern:
-- Create `OPENAI_KEY` as an organization Actions secret
-- Grant it to `.github`, `app-ui`, and `app-api`
+The Ollama-based PR review workflow does not require an external LLM API secret.
 
 Current usage:
-- `.github/.github/workflows/pr-agent-review.yml`
-- Repository root `.pr_agent.toml` in `.github`, `app-ui`, and `app-api`
+- `.github/.github/workflows/ollama-review.yml`
 
-Minimum workflow permissions for PR-Agent:
+Required GitHub Actions permissions for review comments:
 - `contents: read`
-- `issues: write`
 - `pull-requests: write`

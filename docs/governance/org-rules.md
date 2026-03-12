@@ -1,10 +1,10 @@
-﻿# 🧱 Organization Rules
+# ?? Organization Rules
 
 ## Enforced Practices
 
 - Conventional Commit-style PR titles.
 - Required checks before merge to protected branch.
-- PR-Agent review check required before merge to protected branch.
+- Ollama review check required before merge to protected branch.
 - Automated release publication from `main`.
 - Shared guardrails managed centrally in `Omkraft/.github`.
 
@@ -13,7 +13,7 @@
 ## Things to Avoid
 
 - Disabling workflows to force a merge.
-- Merging without the `PR Agent Review` status check passing on protected branches.
+- Merging without the `Ollama Review` status check passing on protected branches.
 - Manual release publishing that bypasses semantic-release.
 - Editing reusable workflow behavior in consumer repos.
 - Changing token permissions without review.

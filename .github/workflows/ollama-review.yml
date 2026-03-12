@@ -1,0 +1,47 @@
+name: Ollama Review
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    name: Ollama Review
+    if: github.event.pull_request.draft == false || github.event.action == 'ready_for_review'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Restore Ollama cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama
+          key: ${{ runner.os }}-ollama-qwen2.5-coder-1.5b-v1
+
+      - name: Setup Ollama
+        uses: ai-action/setup-ollama@v1
+
+      - name: Pull review model
+        run: ollama pull qwen2.5-coder:1.5b
+
+      - name: Run Ollama code review
+        uses: ray5273/ollama-code-review@v1
+        with:
+          OLLAMA_API_URL: http://127.0.0.1:11434
+          MY_GITHUB_TOKEN: ${{ github.token }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          RESPONSE_LANGUAGE: English
+          MODEL: qwen2.5-coder:1.5b
+          CUSTOM_PROMPT: >
+            Review as a strict senior engineer. Prioritize correctness, behavioral
+            regressions, data integrity, API contract drift, auth and permission issues,
+            performance risks, accessibility regressions, and missing or weak tests.
+            Prefer concrete findings tied to changed files. Do not pad the review with
+            praise or summaries when no issue exists.

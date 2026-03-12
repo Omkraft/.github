@@ -14,7 +14,7 @@
 
 ---
 
-## 🧭 Purpose
+## ?? Purpose
 
 This repository is the organization-level source of truth for:
 - Shared GitHub workflows consumed by app repositories
@@ -26,7 +26,7 @@ It exists to keep cross-repo standards centralized and consistent.
 
 ---
 
-## 📦 What Lives Here
+## ?? What Lives Here
 
 ```text
 .github/
@@ -34,7 +34,7 @@ It exists to keep cross-repo standards centralized and consistent.
 |   |-- ISSUE_TEMPLATE/                 # Org issue templates
 |   |-- PULL_REQUEST_TEMPLATE.md
 |   `-- workflows/
-|       |-- pr-agent-review.yml         # Reusable Qodo PR-Agent review workflow
+|       |-- ollama-review.yml           # Reusable local Ollama PR review workflow
 |       |-- pr-title.yml                # Reusable PR title lint workflow
 |       `-- release.yml                 # Reusable semantic-release workflow
 |-- assets/                             # Production-ready brand assets
@@ -44,37 +44,38 @@ It exists to keep cross-repo standards centralized and consistent.
 
 ---
 
-## 🛠️ Reusable Workflows
+## ??? Reusable Workflows
 
 Reusable workflows exported from this repo:
 - `.github/workflows/pr-title.yml`
-- `.github/workflows/pr-agent-review.yml`
+- `.github/workflows/ollama-review.yml`
 - `.github/workflows/release.yml`
 
 Consumer repos currently:
 - `.github` exports reusable workflows consumed by application repositories
-- `app-ui` calls reusable `pr-title`, `pr-agent-review`, and `release`, and defines local PR lint/build plus deploy orchestration
-- `app-api` calls reusable `pr-title`, `pr-agent-review`, and `release`, and defines local PR lint plus deploy orchestration
+- `app-ui` calls reusable `pr-title`, `ollama-review`, and `release`, and defines local PR lint/build plus deploy orchestration
+- `app-api` calls reusable `pr-title`, `ollama-review`, and `release`, and defines local PR lint plus deploy orchestration
 
 ---
 
-## 🤖 PR-Agent Review Automation
+## ?? Ollama Review Automation
 
-Qodo PR-Agent is configured to review pull requests:
+Local Ollama review is configured to review pull requests:
 - on PR open
 - on PR reopen
 - when a draft PR becomes ready for review
 - on every subsequent push to the PR branch (`synchronize`)
 
-Required secret:
-- Organization Actions secret `OPENAI_KEY`
+Current review model:
+- `qwen2.5-coder:1.5b`
 
-Policy file:
-- `.pr_agent.toml` in each participating repository root
+Why this setup:
+- avoids OpenAI and other external LLM API billing
+- keeps review execution on the GitHub runner itself
 
 ---
 
-## 🎨 Branding Assets
+## ?? Branding Assets
 
 Use assets from `/assets` in downstream repositories (READMEs, docs, app surfaces).
 
@@ -86,7 +87,7 @@ Example:
 
 ---
 
-## 📚 Documentation
+## ?? Documentation
 
 Engineering docs are under [`docs/`](docs/README.md), including:
 - CI/CD architecture
@@ -100,7 +101,7 @@ GitHub Pages URL:
 
 ---
 
-## ✅ Maintenance Notes
+## ? Maintenance Notes
 
 When changing workflow behavior:
 1. Update reusable workflow file(s) in this repo.
@@ -109,7 +110,7 @@ When changing workflow behavior:
 
 ---
 
-## 🏷️ License
+## ??? License
 
 MIT
 
