@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Restore Ollama cache
         uses: actions/cache@v4
@@ -195,3 +195,4 @@ jobs:
               issue_number,
               body,
             })
+
