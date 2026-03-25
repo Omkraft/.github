@@ -81,7 +81,14 @@ jobs:
 
           changed_files = []
           total_patch_chars = 0
-          patch_budget = 18000
+          patch_budget = 12000
+          per_file_patch_budget = 1200
+          reviewed_file_limit = 40
+
+          def shorten(text: str, limit: int) -> str:
+              if len(text) <= limit:
+                  return text
+              return text[: max(limit - 15, 0)] + "\n... [truncated]"
 
           for file in files:
               patch = file.get("patch") or ""
@@ -89,8 +96,8 @@ jobs:
                   remaining = patch_budget - total_patch_chars
                   if remaining <= 0:
                       patch = ""
-                  elif len(patch) > remaining:
-                      patch = patch[:remaining] + "\n... [truncated]"
+                  else:
+                      patch = shorten(patch, min(per_file_patch_budget, remaining))
               total_patch_chars += len(patch)
               changed_files.append(
                   {
@@ -100,6 +107,28 @@ jobs:
                       "deletions": file["deletions"],
                       "patch": patch,
                   }
+              )
+
+          reviewed_files = changed_files[:reviewed_file_limit]
+          omitted_files = changed_files[reviewed_file_limit:]
+
+          changed_file_lines = []
+          for file in reviewed_files:
+              summary = (
+                  f"- {file['filename']} ({file['status']}, +{file['additions']} / -{file['deletions']})"
+              )
+              if file["patch"]:
+                  summary += f"\n```diff\n{file['patch']}\n```"
+              changed_file_lines.append(summary)
+
+          omitted_summary = ""
+          if omitted_files:
+              omitted_names = ", ".join(file["filename"] for file in omitted_files[:15])
+              if len(omitted_files) > 15:
+                  omitted_names += ", ..."
+              omitted_summary = (
+                  f"\nAdditional changed files not expanded in prompt: "
+                  f"{len(omitted_files)}\n{omitted_names}"
               )
 
           prompt = textwrap.dedent(
@@ -116,9 +145,13 @@ jobs:
               - If there are material issues, produce a short markdown list of findings.
               - Each finding should mention the relevant file path.
               - If there are no material issues, respond exactly with: No material issues found.
+              - Ignore purely stylistic nits unless they hide a correctness or maintainability risk.
 
-              Changed files:
-              {json.dumps(changed_files, ensure_ascii=False)}
+              Pull request changed {len(changed_files)} file(s).
+
+              Changed files summary:
+              {chr(10).join(changed_file_lines) if changed_file_lines else "- No textual diff available."}
+              {omitted_summary}
               """
           ).strip()
 
